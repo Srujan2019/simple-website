@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>PC Parts Showcase</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: white;
+            color: black;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px;
+            background-color: #007bff;
+            color: white;
+        }
+
+        section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        button {
+            padding: 10px 15px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .dark-mode {
+            background-color: #121212;
+            color: white;
+        }
+
+        .dark-mode header {
+            background-color: #1e1e1e;
+        }
+
+        .dark-mode th {
+            background-color: #333;
+        }
+
+        .toggle-btn {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <button class="toggle-btn" onclick="toggleDarkMode()">Toggle Light/Dark Mode</button>
+    <header>
+        <h1>PC Parts Showcase</h1>
+        <p>Easily add and view PC parts with their prices.</p>
+    </header>
+    <main>
+        <section>
+            <h2>Add a PC Part</h2>
+            <label for="partName">Part Name:</label><br>
+            <input type="text" id="partName" placeholder="e.g., Graphics Card"><br>
+            <label for="partPrice">Price ($):</label><br>
+            <input type="number" id="partPrice" placeholder="e.g., 200"><br>
+            <button onclick="addPart()">Add Part</button>
+        </section>
+        <section>
+            <h2>Parts List</h2>
+            <table id="partsTable">
+                <tr>
+                    <th>Part Name</th>
+                    <th>Price ($)</th>
+                </tr>
+            </table>
+        </section>
+    </main>
+    <script>
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+        }
+
+        function addPart() {
+            const partName = document.getElementById('partName').value;
+            const partPrice = document.getElementById('partPrice').value;
+
+            if (partName && partPrice) {
+                const table = document.getElementById('partsTable');
+                const newRow = table.insertRow();
+                const nameCell = newRow.insertCell(0);
+                const priceCell = newRow.insertCell(1);
+                nameCell.textContent = partName;
+                priceCell.textContent = `$${partPrice}`;
+                document.getElementById('partName').value = '';
+                document.getElementById('partPrice').value = '';
+            } else {
+                alert('Please enter both the part name and price.');
+            }
+        }
+    </script>
+</body>
+</html>
